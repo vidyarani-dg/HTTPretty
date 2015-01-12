@@ -73,6 +73,8 @@ from datetime import timedelta
 from errno import EAGAIN
 
 old_socket = socket.socket
+old_socket_type = socket.SocketType
+
 old_create_connection = socket.create_connection
 old_gethostbyname = socket.gethostbyname
 old_gethostname = socket.gethostname
@@ -949,7 +951,7 @@ class httpretty(HttpBaseClass):
     def disable(cls):
         cls._is_enabled = False
         socket.socket = old_socket
-        socket.SocketType = old_socket
+        socket.SocketType = old_socket_type
         socket._socketobject = old_socket
 
         socket.create_connection = old_create_connection
